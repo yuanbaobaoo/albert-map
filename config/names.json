@@ -1,0 +1,178 @@
+{
+    "Philippines": {
+        "name": "菲律宾"
+        
+    },
+    "Indonesia": {
+        "name": "印度尼西亚"
+        
+    },
+    "Thailand": {
+        "name": "泰国"
+        
+    },
+    "Malaysia": {
+        "name": "马来西亚"
+        
+    },
+    "Brunei": {
+        "name": "文莱"
+        
+    },
+    "Timor-Leste": {
+        "name": "东帝汶"
+        
+    },
+    "Laos": {
+        "name": "老挝"
+        
+    },
+    "Cambodia": {
+        "name": "柬埔寨"
+        
+    },
+    "Myanmar": {
+        "name": "缅甸"
+        
+    },
+    "Vietnam": {
+        "name": "越南"
+        
+    },
+    "Singapore": {
+        "name": "新加坡"
+        
+    },
+    "Kyrgyzstan": {
+        "name": "吉尔吉斯斯坦"
+        
+    },
+    "Uzbekistan": {
+        "name": "乌兹别克斯坦"
+        
+    },
+    "Tajikistan": {
+        "name": "塔吉克斯坦"
+        
+    },
+    "Turkmenistan": {
+        "name": "土库曼斯坦"
+        
+    },
+    "Kazakhstan": {
+        "name": "哈萨克斯坦"
+        
+    },
+    "Qatar": {
+        "name": "卡塔尔"
+        
+    },
+    "Saudi Arabia": {
+        "name": "沙特"
+        
+    },
+    "United Arab Emirates": {
+        "name": "阿联酋"
+        
+    },
+    "Kuwait": {
+        "name": "科威特"
+        
+    },
+    "Oman": {
+        "name": "阿曼"
+        
+    },
+    "Bahrain": {
+        "name": "巴林"
+        
+    },
+    "Yemen": {
+        "name": "也门"
+        
+    },
+    "Jordan": {
+        "name": "约旦"
+        
+    },
+    "Israel": {
+        "name": "以色列"
+        
+    },
+    "Palestine": {
+        "name": "巴勒斯坦"
+        
+    },
+    "Lebanon": {
+        "name": "黎巴嫩"
+        
+    },
+    "Iraq": {
+        "name": "伊拉克"
+        
+    },
+    "Egypt": {
+        "name": "埃及"
+        
+    },
+    "turkey": {
+        "name": "土耳其"
+        
+    },
+    "Iran": {
+        "name": "伊朗"
+        
+    },
+    "Libya": {
+        "name": "利比亚"
+        
+    },
+    "Algeria": {
+        "name": "阿尔及利亚"
+        
+    },
+    "Tunisia": {
+        "name": "突尼斯"
+        
+    },
+    "Western Sahara": {
+        "name": "西撒哈拉"
+        
+    },
+    "Morocco": {
+        "name": "摩洛哥"
+        
+    },
+    "Mauritania": {
+        "name": "毛里塔尼亚"
+        
+    },
+    "Senegal": {
+        "name": "塞内加尔"
+        
+    },
+    "Niger": {
+        "name": "尼日尔"
+        
+    },
+    "burkina faso ": {
+        "name": "布基纳法索"
+        
+    },
+    "Mali": {
+        "name": "马里"
+        
+    },
+    "Guinea": {
+        "name": "几内亚"
+        
+    },
+    "Cote d'Ivoire": {
+        "name": "科特迪瓦"
+        
+    },
+    "Guinea-Bissau": {
+        "name": "几内亚比绍"
+        
+    }
+}
