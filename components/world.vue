@@ -42,12 +42,12 @@ onMounted(() => {
     })
 
     //
-    document.addEventListener("mousedown", startMove);
-    document.addEventListener("mousemove", execMove);
-    document.addEventListener("touchstart", startMove);
-    document.addEventListener("touchmove", execMove);
-    document.addEventListener('mouseup', endMove);
-    document.addEventListener('touchend', endMove);
+    // document.addEventListener("mousedown", startMove);
+    // document.addEventListener("mousemove", execMove);
+    // document.addEventListener("touchstart", startMove);
+    // document.addEventListener("touchmove", execMove);
+    // document.addEventListener('mouseup', endMove);
+    // document.addEventListener('touchend', endMove);
     // 创建大小监听
     window.addEventListener("resize", resize);
 })
@@ -137,8 +137,8 @@ function resize() {
     if (myChart1 || myChart2 || myChart3) {
         nextTick(() => {
             myChart1.resize();
-            myChart2.resize();
-            myChart3.resize();
+            // myChart2.resize();
+            // myChart3.resize();
         })
     }
 }
@@ -149,8 +149,8 @@ function resize() {
 function initChart() {
     echarts.registerMap('world', world as any);
     myChart1 = echarts.init(document.getElementById('map1'));
-    myChart2 = echarts.init(document.getElementById('map2'));
-    myChart3 = echarts.init(document.getElementById('map3'));
+    // myChart2 = echarts.init(document.getElementById('map2'));
+    // myChart3 = echarts.init(document.getElementById('map3'));
 
     // 指定图表的配置项和数据
     let option = {
@@ -163,7 +163,7 @@ function initChart() {
             left: 0,
             right: 0,
             map: 'world',
-            roam: 'false',
+            roam: true,
             label: {
                 show: false,
             },
@@ -173,6 +173,10 @@ function initChart() {
                     show: true,
                 },
             },
+            scaleLimit: {
+                min: 1,
+                max: 5
+            },
             nameMap: VideoMetaData.getEchartsNameMap(),
             regions: VideoMetaData.getEchartsExistRegions(),
         },
@@ -180,8 +184,8 @@ function initChart() {
 
     // 使用刚指定的配置项和数据显示图表。
     myChart1.setOption(option);
-    myChart2.setOption(option);
-    myChart3.setOption(option);
+    // myChart2.setOption(option);
+    // myChart3.setOption(option);
     refreshChatColor();
 
     const clickFn = (params: any) => {
@@ -194,8 +198,97 @@ function initChart() {
 
     // 点击事件
     myChart1.on("click", clickFn)
-    myChart2.on("click", clickFn)
-    myChart3.on("click", clickFn)
+    myChart1.on("georoam", (e: any) => {
+        // author: https://blog.csdn.net/qq_44706619/article/details/130665934
+        // 获取当前地图的位置信息
+        // 处理程序代码
+        let geoComp = myChart1.getModel().getComponent('geo');
+        let boundingCoords = geoComp.coordinateSystem.getBoundingRect();
+        let options = myChart1.getOption();//获得option对象
+        let center = options.geo[0].center
+        let dx = Math.max(center[0] - boundingCoords.x, 0, boundingCoords.x + boundingCoords.width - center[0]);
+        let dy = Math.max(center[1] - boundingCoords.y, 0, boundingCoords.y + boundingCoords.height - center[1]);
+        let distancePercentage = [(dx / boundingCoords.width) * 100, (dy / boundingCoords.height) * 100];
+        // console.log('distancePercentage:', distancePercentage);
+        //求出极值了
+        let percent = 95
+        let percentEdge = 0.95
+        let leftX = boundingCoords.x + percentEdge * boundingCoords.width
+        let rightX = boundingCoords.x - (percentEdge - 1) * boundingCoords.width
+        let topY = boundingCoords.y + percentEdge * boundingCoords.height
+        let bottomY = boundingCoords.y - (percentEdge - 1) * boundingCoords.height
+        // console.log('极值',leftX,rightX,topY,bottomY)
+        let limitCenter = [];
+        //方法一：需要控制移动的时候geo的center。来实现限制拖拽到盒子外部。
+        //那么需要利用当前的地图的center（而不是geo可变的center）计算出一个标准值。
+        //例如：默认center距离左边50%，那么预期是想当拖拽到距离左边<=10%的时候不给拖动了，就设置geo的center为此时center的值
+        //需要算是center距离左边10%的时候的坐标，然后赋值到geo上应该可以实现
+        // console.log('发生的回复',center[0] - boundingCoords.x, 0, boundingCoords.x + boundingCoords.width - center[0])
+        if (distancePercentage[0] > percent || distancePercentage[1] > percent) {
+            // options.geo[0].center = options.center
+            // myChart1.setOption(options);//设置option   // 情况是超过这个范围会自动复原位
+            // limitCenter = []
+            // return
+
+            if (!limitCenter.length) {
+                // console.log('跳出了')
+                let diyCenter = options.geo[0].center
+                if (options.geo[0].center[0] > leftX) {
+                    diyCenter[0] = leftX
+                    if (distancePercentage[1] > percent && options.geo[0].center[1] > topY) {   //往左滑
+                        // console.log('左下角')
+                        diyCenter[1] = topY
+                    } else if (distancePercentage[1] > percent && options.geo[0].center[1] < bottomY) {
+                        // console.log('左上角')
+                        diyCenter[1] = bottomY
+                    }
+                    options.geo[0].center = diyCenter
+                    myChart1.setOption(options);
+                    return
+                } else if (options.geo[0].center[0] < rightX) {
+                    diyCenter[0] = rightX
+                    if (distancePercentage[1] > percent && options.geo[0].center[1] > topY) {   //往左滑
+                        // console.log('右下角')
+                        diyCenter[1] = topY
+                    } else if (distancePercentage[1] > percent && options.geo[0].center[1] < bottomY) {
+                        // console.log('右上角')
+                        diyCenter[1] = bottomY
+                    }
+                    options.geo[0].center = diyCenter
+                    myChart1.setOption(options);
+                    return
+                } else if (options.geo[0].center[1] > topY) {
+                    diyCenter[1] = topY
+                    options.geo[0].center = diyCenter
+                    myChart1.setOption(options);
+                    return
+                } else if (options.geo[0].center[1] < bottomY) {
+                    diyCenter[1] = bottomY
+                    options.geo[0].center = diyCenter
+                    myChart1.setOption(options);
+                    return
+                } else {
+                    // options.geo[0].center = options.center
+                    // myChart1.setOption(options);
+                    // return
+                }
+            } else {
+                options.geo[0].center = limitCenter
+                myChart1.setOption(options);//设置option
+                return
+            }
+            // myChart1.setOption(options);//设置option  // 情况是边缘连续横向、竖向有些卡顿感
+            return
+        } else if (Math.floor(distancePercentage[0]) == percent || Math.floor(distancePercentage[1]) == percent || Math.ceil(distancePercentage[0]) == percent || Math.ceil(distancePercentage[1]) == percent) {
+            limitCenter = center || ['50%', '50%']
+        } else if (distancePercentage[0] < percent && distancePercentage[1] < percent) {
+            limitCenter = []
+        }
+        if (limitCenter.length) {
+            options.geo[0].center = limitCenter
+            myChart1.setOption(options);
+        }
+    })
 }
 
 /**
@@ -211,8 +304,8 @@ function refreshChatColor() {
     }
 
     myChart1.setOption(color);
-    myChart2.setOption(color);
-    myChart3.setOption(color);
+    // myChart2.setOption(color);
+    // myChart3.setOption(color);
 }
 
 /**
@@ -245,18 +338,7 @@ function getLightColor() {
         width: width + 'px',
         height: height + 'px',
     }">
-        <div class="map" id="map1" :style="{
-
-        left: left1 + 'px',
-    }" />
-
-        <div class="map" id="map2" :style="{
-        left: left2 + 'px',
-    }" />
-
-        <div class="map" id="map3" :style="{
-        left: left3 + 'px',
-    }" />
+        <div class="map" id="map1"/>
     </div>
 </template>
 
@@ -272,6 +354,7 @@ function getLightColor() {
         left: 0;
         top: 0;
     }
+
 }
 
 </style>
