@@ -158,3 +158,8 @@
 .VPDoc.has-aside .aside{
     display: none !important;
 }
+
+
+.VPNavBar.home.top .container {
+    max-width: unset !important;
+}

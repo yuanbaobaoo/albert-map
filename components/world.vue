@@ -7,7 +7,9 @@ import {VideoMetaData} from "../utils/VideoMetaData";
 import {HTMLElementUtil} from "../utils/HTMLElementUtil";
 import consts from "../config/consts";
 
-let myChart: any = null;
+let myChart1: any = null;
+let myChart2: any = null;
+let myChart3: any = null;
 const width = ref(0);
 const height = ref(0);
 const data = useData();
@@ -18,6 +20,14 @@ const data = useData();
 watch(() => data.isDark.value, () => {
     refreshChatColor();
 })
+
+const windowWidth = ref(0);
+const left1 = ref(0);
+const left2 = ref(0);
+const left3 = ref(0);
+const realLeft1 = ref(0);
+const realLeft2 = ref(0);
+const realLeft3 = ref(0);
 
 /**
  * onMounted
@@ -31,6 +41,14 @@ onMounted(() => {
         })
     })
 
+    //
+    document.addEventListener("mousedown", startMove);
+    document.addEventListener("mousemove", execMove);
+    document.addEventListener("touchstart", startMove);
+    document.addEventListener("touchmove", execMove);
+    document.addEventListener('mouseup', endMove);
+    document.addEventListener('touchend', endMove);
+    // 创建大小监听
     window.addEventListener("resize", resize);
 })
 
@@ -40,6 +58,63 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener("resize", resize);
 });
+
+let isMove = false;
+let startX = 0;
+
+
+function startMove(event: any) {
+    isMove = true;
+    startX = event.clientX;
+}
+
+function execMove(event: any) {
+    if (!isMove) {
+        return ;
+    }
+
+    const deltaX = event.clientX - startX;
+    left1.value = realLeft1.value + deltaX;
+    left2.value = realLeft2.value + deltaX;
+    left3.value = realLeft3.value + deltaX;
+
+    // if (Math.abs(left1.value) % windowWidth.value == 0) {
+    //     // resize();
+    //     // console.log("left1 临界");
+    // }
+    //
+    // if (Math.abs(left2.value) < 10) {
+    //     console.log("left2 临界");
+    // }
+    //
+    // if (Math.abs(left1.value) >= windowWidth.value * 2 ) {
+    //     console.log("left1 过界");
+    //     // resize();
+    // }
+
+    if (left1.value >= 0) {
+        left1.value = 0;
+        left2.value = windowWidth.value;
+        left3.value = windowWidth.value * 2;
+    }
+
+    if (left1.value < 0 && Math.abs(left1.value) >= windowWidth.value * 2) {
+        left1.value = -(windowWidth.value * 2);
+        left2.value = -(windowWidth.value);
+        left3.value = 0;
+    }
+
+}
+
+function endMove() {
+    if (isMove) {
+        isMove = false;
+    }
+
+    realLeft1.value = left1.value;
+    realLeft2.value = left2.value;
+    realLeft3.value = left3.value;
+}
 
 /**
  * 窗口大小变化
@@ -51,9 +126,19 @@ function resize() {
     width.value = HTMLElementUtil.getDomWidth(dom);
     height.value = HTMLElementUtil.getDomHeight(dom) - HTMLElementUtil.getDomHeight(navDom);
 
-    if (myChart) {
+    windowWidth.value = width.value;
+    left1.value = -width.value;
+    left2.value  = 0;
+    left3.value  = width.value;
+    realLeft1.value = -width.value;
+    realLeft2.value = 0;
+    realLeft3.value = width.value;
+
+    if (myChart1 || myChart2 || myChart3) {
         nextTick(() => {
-            myChart.resize();
+            myChart1.resize();
+            myChart2.resize();
+            myChart3.resize();
         })
     }
 }
@@ -63,7 +148,9 @@ function resize() {
  */
 function initChart() {
     echarts.registerMap('world', world as any);
-    myChart = echarts.init(document.getElementById('main'));
+    myChart1 = echarts.init(document.getElementById('map1'));
+    myChart2 = echarts.init(document.getElementById('map2'));
+    myChart3 = echarts.init(document.getElementById('map3'));
 
     // 指定图表的配置项和数据
     let option = {
@@ -76,7 +163,7 @@ function initChart() {
             left: 0,
             right: 0,
             map: 'world',
-            roam: true,
+            roam: 'false',
             label: {
                 show: false,
             },
@@ -92,17 +179,23 @@ function initChart() {
     };
 
     // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    myChart1.setOption(option);
+    myChart2.setOption(option);
+    myChart3.setOption(option);
     refreshChatColor();
 
-    // 点击事件
-    myChart.on("click", (params: any) => {
+    const clickFn = (params: any) => {
         const video: any = VideoMetaData.getVideoByAreaName(params.name);
 
         if (video && video.bvid) {
             window.open(consts.BiliBiliUrl + video.bvid, "_blank");
         }
-    })
+    };
+
+    // 点击事件
+    myChart1.on("click", clickFn)
+    myChart2.on("click", clickFn)
+    myChart3.on("click", clickFn)
 }
 
 /**
@@ -112,34 +205,14 @@ function refreshChatColor() {
     let color = {};
 
     if (data.isDark.value) {
-        color = getDarkColor();
+        // color = getDarkColor();
     } else {
         color = getLightColor();
     }
 
-    myChart.setOption(color);
-}
-
-/**
- * 获取暗黑主题颜色
- */
-function getDarkColor() {
-    return {
-        geo: {
-            itemStyle: {
-                areaColor: '#575A5E',
-                borderColor: '#888B8F'
-            },
-            emphasis: {
-                label: {
-                    color: '#fff'
-                },
-                itemStyle: {
-                    areaColor: '#234200'
-                }
-            },
-        }
-    };
+    myChart1.setOption(color);
+    myChart2.setOption(color);
+    myChart3.setOption(color);
 }
 
 /**
@@ -168,13 +241,37 @@ function getLightColor() {
 </script>
 
 <template>
-    <div class="model-3d" id="main" :style="{width: width + 'px', height: height + 'px'}">
+    <div class="map-container" :style="{
+        width: width + 'px',
+        height: height + 'px',
+    }">
+        <div class="map" id="map1" :style="{
 
+        left: left1 + 'px',
+    }" />
+
+        <div class="map" id="map2" :style="{
+        left: left2 + 'px',
+    }" />
+
+        <div class="map" id="map3" :style="{
+        left: left3 + 'px',
+    }" />
     </div>
 </template>
 
 <style scoped lang="scss">
-.model-3d {
+.map-container {
+    position: relative;
+    overflow: hidden;
 
+    .map {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 }
+
 </style>

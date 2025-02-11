@@ -12,6 +12,13 @@ export default defineConfig({
     srcExclude: [
         '**/README.md'
     ],
+    head: [
+        [
+            'meta',
+            {name: "viewport", content: "width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=0"}
+        ],
+    ],
+    appearance: false,
     themeConfig: {
         // 标题左侧logo
         logo: "",
@@ -38,6 +45,7 @@ export default defineConfig({
 
         // 不展示右侧大纲，该配置只控制右侧大纲是否展示，但是其父容器仍然会存在
         // 如果不想让右侧大纲容器占宽度，则需要手动处理（例如：通过css）
-        outline: false
+        outline: false,
+
     }
 })
