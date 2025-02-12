@@ -47,5 +47,15 @@ export default defineConfig({
         // 如果不想让右侧大纲容器占宽度，则需要手动处理（例如：通过css）
         outline: false,
 
+        // 编辑链接
+        editLink: {
+            pattern: 'https://github.com/yuanbaobaoo/albert-map',
+            text: '在GitHub上编辑此页'
+        },
+
+        // socialLinks
+        socialLinks: [
+            { icon: 'github', link: 'https://github.com/yuanbaobaoo/albert-map' },
+        ]
     }
 })
