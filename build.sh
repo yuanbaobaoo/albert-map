@@ -31,11 +31,11 @@ find "$workPath" -maxdepth 1 -print | while read item; do
 done
 
 # 复制当前目录文件到缓存目录
-cp -r . $workPath/
+find . -maxdepth 1 ! -name "node_modules" ! -name "." ! -name ".git" ! -name ".gitignore" ! -name ".vitepress" ! -name ".idea" ! -name "dist" -exec cp -r {} $workPath/ \;
+# 处理了一下.vitepress目录下的文件
+find .vitepress -maxdepth 1 ! -name "." ! -name "cache" -exec cp -r {} $workPath/.vitepress/ \;
 # 切换工作目录
 cd $workPath
-# 删除 .git
-rm -rf .git .gitignore
 
 # 判断是否有插件，有的话就执行
 if [ -e plugin.sh ]; then
