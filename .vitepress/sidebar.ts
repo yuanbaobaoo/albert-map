@@ -238,8 +238,8 @@ export default [
             },
             {
                 text: '布基纳法索', link: '/docs/videos-WestAfrica?a=布基纳法索',
-                title: "BV1iQxxesEfQ",
-                bvid: "离上帝太远离欧洲太近，天降猛男挡不住精法非奸【西非02丨布基纳法索】\n",
+                title: "离上帝太远离欧洲太近，天降猛男挡不住精法非奸【西非02丨布基纳法索】",
+                bvid: "BV1iQxxesEfQ",
             },
             {
                 text: '尼日尔', link: '/docs/videos-WestAfrica?a=尼日尔',
