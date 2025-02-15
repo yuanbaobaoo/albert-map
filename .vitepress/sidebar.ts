@@ -267,6 +267,11 @@ export default [
                 title: "中国的西非老战友，如何靠着一带一路摆脱动荡【西非07｜几内亚比绍】",
                 bvid: "BV12RfUYiE4E",
             },
+            {
+                text: '贝宁', link: '/docs/videos-WestAfrica?a=贝宁',
+                title: "从理想战士到投降抽象，霸权如何逼良为娼【西非08丨贝宁】",
+                bvid: "BV14eKKeiE4U",
+            }
         ]
     },
 ]
