@@ -4,4 +4,4 @@ layout: doc
 # 如何加入我们？
 ---
 
-如果确实有需要，后续会托管到github，届时欢迎各位加入
+Github: https://github.com/yuanbaobaoo/albert-map

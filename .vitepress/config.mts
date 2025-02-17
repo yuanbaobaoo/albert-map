@@ -4,7 +4,7 @@ import compile from "./compile";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: "小王Albert的电子地图册(Online)",
+    title: "电图宝",
     description: "小王Albert的电子地图 | 小王Albert的电子地图 · 在线版 | 世界地图 | 中国地图 | 电子地图 | 王骁Albert | 东盟十国 | 西非 | 中东 | 马格里布",
     lastUpdated: true,
     outDir: "./dist",
