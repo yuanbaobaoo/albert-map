@@ -1,3 +1,13 @@
+<style>
+    .videos img {
+        width: 120px; height: 120px; border-radius: 120px;
+    }
+    
+    .videos td {
+    text-align: center;
+    }
+</style>
+
 电图宝
 ---
 这是一个用于收录B站部分UP视频的电子地图项目，核心目的如下  
@@ -7,15 +17,6 @@
 - （期望）能够缓存收录的视频  
 
 ### 收录栏目
-<style>
-.videos img {
-    width: 120px; height: 120px; border-radius: 120px;
-}
-
-.videos td {
-    text-align: center;
-}
-</style>
 <table class="videos" style="width: 100%;">
   <tr>
     <th style="width: 150px">栏目名称</th>
