@@ -17,7 +17,7 @@
   <tr>
     <td>电子地图册</td>
     <td>
-        <img alt="小王Albert" src="https://i1.hdslb.com/bfs/face/f9bb5dc9b5dcb3c90f9662e44fca9a7506584151.jpg" style="width: 120px; height: 120px; border-radius: 120px;" />
+        <img alt="小王Albert" src="https://i1.hdslb.com/bfs/face/f9bb5dc9b5dcb3c90f9662e44fca9a7506584151.jpg" style="width: 60px; height: 60px; border-radius: 60px;" />
     </td>
     <td>https://space.bilibili.com/1140672573</td>
     <td>✅</td>
@@ -25,7 +25,7 @@
   <tr>
     <td>三国·东汉篇</td>
     <td>
-        <img alt="草说木言" src="https://i1.hdslb.com/bfs/face/a0f8681b794ac338b05307e6bb5798e625b38e14.jpg" style="width: 120px; height: 120px; border-radius: 120px;" />
+        <img alt="草说木言" src="https://i1.hdslb.com/bfs/face/a0f8681b794ac338b05307e6bb5798e625b38e14.jpg" style="width: 60px; height: 60px; border-radius: 60px;" />
     </td>
     <td>https://space.bilibili.com/477433087</td>
     <td>❌</td>
