@@ -7,30 +7,37 @@
 - （期望）能够缓存收录的视频  
 
 ### 收录栏目
-<table style="width: 100%;">
+<style>
+.videos img {
+    width: 120px; height: 120px; border-radius: 120px;
+}
+
+.videos td {
+    text-align: center;
+}
+</style>
+<table class="videos" style="width: 100%;">
   <tr>
-    <th align="center">栏目名称</th>
-    <th align="center">UP主</th>
-    <th align="center">B站主页</th>
-    <th align="center">收录状态</th>
+    <th style="width: 150px">栏目名称</th>
+    <th>UP主</th>
+    <th>B站主页</th>
+    <th>收录状态</th>
   </tr>
   <tr>
-    <td align="center">电子地图册</td>
-    <td align="center">
-        小王Albert
-        <img src="https://i1.hdslb.com/bfs/face/f9bb5dc9b5dcb3c90f9662e44fca9a7506584151.jpg" />
+    <td>电子地图册</td>
+    <td>
+        <img alt="小王Albert" src="https://i1.hdslb.com/bfs/face/f9bb5dc9b5dcb3c90f9662e44fca9a7506584151.jpg" />
     </td>
-    <td align="center">https://space.bilibili.com/1140672573</td>
-    <td align="center">✅</td>
+    <td>https://space.bilibili.com/1140672573</td>
+    <td>✅</td>
   </tr>
   <tr>
-    <td align="center">三国·东汉篇</td>
-    <td align="center">
-        草说木言
-        <img src="https://i1.hdslb.com/bfs/face/a0f8681b794ac338b05307e6bb5798e625b38e14.jpg" />
+    <td>三国·东汉篇</td>
+    <td>
+        <img alt="草说木言" src="https://i1.hdslb.com/bfs/face/a0f8681b794ac338b05307e6bb5798e625b38e14.jpg" />
     </td>
-    <td align="center">https://space.bilibili.com/477433087</td>
-    <td align="center">❌</td>
+    <td>https://space.bilibili.com/477433087</td>
+    <td>❌</td>
   </tr>
 </table>
 网站中所有内容从互联网公开资源中获取（主要是B站），如有侵权行为，请立即联系我们
