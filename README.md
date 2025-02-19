@@ -1,14 +1,40 @@
-小王Albert电子地图系列视频 - 地图版
+电图宝
 ---
+这是一个用于收录B站部分UP视频的电子地图项目，核心目的如下  
+- （核心）整理视频，针对不同栏目的视频进行分类展示
+- （核心）地图展示，针对地区类栏目，将栏目中的区域在线化 
+- （核心）资料收集，针对栏目中所提及的文档、资料、热评进行整理、收录、总结（AI与人工）
+- （期望）能够缓存收录的视频  
 
-这是一个非官方的、关于 ```小王Albert``` 的电子地图系列视频的整理站点  
-访问地址：https://map.aoowu.cn
-
-### 请注意，这是一个网友自发整理的网站，与 ```小王Albert``` 无关
+### 收录栏目
+<table style="width: 100%;">
+  <tr>
+    <th align="center">栏目名称</th>
+    <th align="center">UP主</th>
+    <th align="center">B站主页</th>
+    <th align="center">收录状态</th>
+  </tr>
+  <tr>
+    <td align="center">电子地图册</td>
+    <td align="center">
+        小王Albert
+        <img src="https://i1.hdslb.com/bfs/face/f9bb5dc9b5dcb3c90f9662e44fca9a7506584151.jpg" />
+    </td>
+    <td align="center">https://space.bilibili.com/1140672573</td>
+    <td align="center">✅</td>
+  </tr>
+  <tr>
+    <td align="center">三国·东汉篇</td>
+    <td align="center">
+        草说木言
+        <img src="https://i1.hdslb.com/bfs/face/a0f8681b794ac338b05307e6bb5798e625b38e14.jpg" />
+    </td>
+    <td align="center">https://space.bilibili.com/477433087</td>
+    <td align="center">❌</td>
+  </tr>
+</table>
 网站中所有内容从互联网公开资源中获取（主要是B站），如有侵权行为，请立即联系我们
 
-### 为什么创建这个网站？
-我们创建这个网站的初衷，是因为看了这么久 ```小王Albert``` 的视频，虽然看了多了，但是看完就忘记这个国家在哪儿了，
-同时又看到了一些 ```B友``` 在评论区希望出一个地图，
-同时也为了更好地整理和分享```小王Albert```的 ```电子地图``` 系列视频内所讲述的国家与地区在这个世界上真实的位置。
-如果你来到了这个网站，那么我们希望你能够在这里找到一些你想要的信息。
+
+### 在线地址
+访问地址：https://map.aoowu.cn
