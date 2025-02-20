@@ -1,5 +1,5 @@
 *.log
 .idea
-dist
-node_modules
-.vitepress/cache
+**/dist
+**/node_modules
+**/.vitepress/cache

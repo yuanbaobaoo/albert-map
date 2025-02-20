@@ -4,5 +4,5 @@ FROM nginx:latest
 RUN mkdir -vp /data/www
 # 复制文件
 COPY dist/ /data/www/
-# 复制nginx配置文件
+# 复制配置
 COPY nginx.conf /etc/nginx/conf.d/default.conf

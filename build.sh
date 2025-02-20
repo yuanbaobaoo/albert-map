@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
 # 判断版本号
-if [ $# -eq0 ]; then
-    echo "错误: 参数不足, #build \$version"
+if [ $# -eq 0 ]; then
+    echo "错误: 参数不足, #build \$project"
     exit 1
 fi
 
 # 项目名称
-project=xw-albert-map
+project="vmap-wiki-$1"
+# 目录名称
+projdir="site-$project"
 # 版本号
-version=$(echo $1 | sed 's/[\/&]/\\&/g')
+version=$(date -d "$CI_PIPELINE_CREATED_AT" +"%Y%m%d%H%M%S")
 # 工作目录
-workPath=/data/xe-shell-cache/$project
+workPath=/data/xe-shell-cache/v-map-wiki/$projdir
 
 mkdir -p $workPath
 echo "npm编译参数: 工作目录=$workPath, 版本号=$version"
@@ -29,6 +31,9 @@ find "$workPath" -maxdepth 1 -print | while read item; do
     echo "正在删除缓存：$item"
     rm -r $item
 done
+
+# 切换到项目目录
+cd $projdir
 
 # 复制当前目录文件到缓存目录
 find . -maxdepth 1 ! -name "node_modules" ! -name "." ! -name ".git" ! -name ".gitignore" ! -name ".vitepress" ! -name ".idea" ! -name "dist" -exec cp -r {} $workPath/ \;
@@ -51,48 +56,4 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# nexus docker 仓库地址
-nexus_url=registry.cn-hongkong.aliyuncs.com/yuanbaobaoo/site
-# 是否删除本地镜像
-dellocal=true
-# 打包镜像
-echo "docker打包参数: project=$project, version=$version"
-
-# build
-echo "start: docker build -t $project ."
-docker build -q -t $project .
-
-# 检查退出状态码
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-# push
-imageName="$nexus_url:$project-$version"
-echo "docker tag $project $imageName"
-docker tag $project $imageName
-
-# 检查退出状态码
-if [ $? -ne 0 ]; then
-  exit 1
-fi
-
-# 如果本地镜像不保留，则上传镜像
-if [ "$dellocal" != "false" ]; then
-  # 上传镜像
-  echo "docker push $imageName"
-  docker push $imageName
-
-  # 检查退出状态码
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
-
-  echo "删除本地镜像缓存: $imageName"
-  docker rmi $imageName
-fi
-
-# push 成功后，删除本地镜像
-docker rmi $project
-# 用同名同版本打包，之前的镜像被变成<none>，这里先考虑删掉
-docker rmi $(docker images -f "dangling=true" -q) || true
+echo "npm编译结束: 工作目录=$workPath, 版本号=$version"

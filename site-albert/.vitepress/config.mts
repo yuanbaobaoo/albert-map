@@ -49,13 +49,13 @@ export default defineConfig({
 
         // 编辑链接
         editLink: {
-            pattern: 'https://github.com/yuanbaobaoo/albert-map',
+            pattern: 'https://github.com/yuanbaobaoo/v-map-wiki',
             text: '在GitHub上编辑此页'
         },
 
         // socialLinks
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/yuanbaobaoo/albert-map' },
+            { icon: 'github', link: 'https://github.com/yuanbaobaoo/v-map-wiki' },
         ]
     }
 })
