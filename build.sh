@@ -9,9 +9,9 @@ fi
 # 项目名称
 project="vmap-wiki-$1"
 # 目录名称
-projdir="site-$project"
+projdir="site-$1"
 # 版本号
-version=$(date -d "$CI_PIPELINE_CREATED_AT" +"%Y%m%d%H%M%S")
+version=$(date +"%Y%m%d%H%M")
 # 工作目录
 workPath=/data/xe-shell-cache/v-map-wiki/$projdir
 
@@ -32,11 +32,13 @@ find "$workPath" -maxdepth 1 -print | while read item; do
     rm -r $item
 done
 
+# 复制当前目录其他文件(只复制文件)
+find . -maxdepth 1 -type f ! -name "." ! -name ".gitignore" ! -name "build.sh"  -exec cp -r {} $workPath/ \;
 # 切换到项目目录
 cd $projdir
 
 # 复制当前目录文件到缓存目录
-find . -maxdepth 1 ! -name "node_modules" ! -name "." ! -name ".git" ! -name ".gitignore" ! -name ".vitepress" ! -name ".idea" ! -name "dist" -exec cp -r {} $workPath/ \;
+find . -maxdepth 1 ! -name "node_modules" ! -name "." ! -name ".vitepress" ! -name "dist" -exec cp -r {} $workPath/ \;
 # 处理了一下.vitepress目录下的文件
 find .vitepress -maxdepth 1 ! -name "." ! -name "cache" -exec cp -r {} $workPath/.vitepress/ \;
 # 切换工作目录
@@ -56,4 +58,49 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "npm编译结束: 工作目录=$workPath, 版本号=$version"
+# 执行 docker镜像编译
+# nexus docker 仓库地址
+nexus_url=registry.cn-hongkong.aliyuncs.com/yuanbaobaoo/site
+# 是否删除本地镜像
+dellocal=true
+# 打包镜像
+echo "docker打包参数: project=$project, version=$version"
+
+# build
+echo "start: docker build -t $project ."
+docker build -q -t $project .
+
+# 检查退出状态码
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+# push
+imageName="$nexus_url:$project-$version"
+echo "docker tag $project $imageName"
+docker tag $project $imageName
+
+# 检查退出状态码
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+# 如果本地镜像不保留，则上传镜像
+#if [ "$dellocal" != "false" ]; then
+#  # 上传镜像
+#  echo "docker push $imageName"
+#  docker push $imageName
+#
+#  # 检查退出状态码
+#  if [ $? -ne 0 ]; then
+#    exit 1
+#  fi
+#
+#  echo "删除本地镜像缓存: $imageName"
+#  docker rmi $imageName
+#fi
+
+# push 成功后，删除本地镜像
+#docker rmi $project
+# 用同名同版本打包，之前的镜像被变成<none>，这里先考虑删掉
+#docker rmi $(docker images -f "dangling=true" -q) || true
