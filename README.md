@@ -7,7 +7,7 @@
 - （期望）能够缓存收录的视频  
 
 ### 收录栏目
-<table class="videos" style="width: 100%;text-align: center">
+<table class="videos" style="width: 100vw;text-align: center">
   <tr>
     <th style="width: 150px">栏目名称</th>
     <th>UP主</th>
@@ -17,14 +17,14 @@
   <tr>
     <td>电子地图册</td>
     <td>小王Albert</td>
-    <td>https://space.bilibili.com/1140672573</td>
-    <td>✅</td>
+    <td>[B站地址](https://space.bilibili.com/1140672573)</td>
+    <td>⌛ 进行中</td>
   </tr>
   <tr>
     <td>三国·东汉篇</td>
     <td>草说木言</td>
-    <td>https://space.bilibili.com/477433087</td>
-    <td>❌</td>
+    <td>[B站地址](https://space.bilibili.com/477433087)</td>
+    <td>❌ 未开始</td>
   </tr>
 </table>
 网站中所有内容从互联网公开资源中获取（主要是B站），如有侵权行为，请立即联系我们
