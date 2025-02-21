@@ -17,9 +17,7 @@ export default defineConfig({
         ],
     ],
     appearance: false,
-    a: "123",
     themeConfig: {
-        a: "adb",
         // 标题左侧logo
         logo: "",
 
