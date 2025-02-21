@@ -25,7 +25,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "================================"
+echo "================================="
 
 # nexus docker 仓库地址
 nexus_url=registry.cn-hongkong.aliyuncs.com/yuanbaobaoo/site
