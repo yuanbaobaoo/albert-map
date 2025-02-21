@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import * as echarts from "echarts";
 import {ref, nextTick, onMounted, onUnmounted, watch} from "vue";
-import world from "../config/world.json"
+import world from "../world.json"
 import {useData} from "vitepress";
 import {VideoMetaData} from "../utils/VideoMetaData";
 import {HTMLElementUtil} from "../utils/HTMLElementUtil";
-import consts from "../config/consts";
+import consts from "../consts";
 
 let myChart1: any = null;
 let myChart2: any = null;

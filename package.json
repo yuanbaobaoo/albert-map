@@ -1,15 +1,6 @@
 {
     "scripts": {
-        "build": "vitepress build",
-        "docs:dev": "vitepress dev",
-        "docs:build": "vitepress build",
-        "docs:preview": "vitepress preview"
-    },
-    "dependencies": {
-        "echarts": "^5.5.1"
-    },
-    "devDependencies": {
-        "sass-embedded": "^1.83.4",
-        "vitepress": "^1.5.0"
+        "dev:main": "cd site-main && npm run docs:dev -- --host 0.0.0.0 --port 5270",
+        "dev:albert": "cd site-albert && npm run docs:dev -- --host 0.0.0.0 --port 5271"
     }
 }

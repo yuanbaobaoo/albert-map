@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import {ref, nextTick, onMounted, onUnmounted, watch} from "vue";
 import {useData} from "vitepress";
-import {HTMLElementUtil} from "../utils/HTMLElementUtil";
 import {VideoMetaData} from "../utils/VideoMetaData";
-import consts from "../config/consts";
+import consts from "../consts";
 
 const data = useData();
 const videoId = ref("")
@@ -15,9 +14,7 @@ const videoTitle = ref("")
  */
 onMounted(() => {
     videoTitle.value = "";
-
-    const region: any = HTMLElementUtil.getQueryParams();
-    const video: any = VideoMetaData.getVideoByAreaName(region.get("a"));
+    const video: any = VideoMetaData.getVideoByAreaName(data.page.value.params.name);
 
     if (video && video.bvid) {
         videoId.value = video.bvid;

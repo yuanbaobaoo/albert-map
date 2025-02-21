@@ -6,4 +6,4 @@ layout: doc
 
 B站：```天府盐煎肉``` <br/>
 邮箱：```hodge.yuan@hotmail.com```  
-Github: ``https://github.com/yuanbaobaoo/albert-map``
+Github: ```https://github.com/yuanbaobaoo/v-map-wiki```

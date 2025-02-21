@@ -1,46 +1,20 @@
 #!/usr/bin/env bash
 
 # 判断版本号
-if [ $# -eq0 ]; then
-    echo "错误: 参数不足, #build \$version"
+if [ $# -eq 0 ]; then
+    echo "错误: 参数不足, #build \$project"
     exit 1
 fi
 
 # 项目名称
-project=xw-albert-map
+project="vmap-wiki-$1"
+# 目录名称
+projdir="site-$1"
 # 版本号
-version=$(echo $1 | sed 's/[\/&]/\\&/g')
-# 工作目录
-workPath=/data/xe-shell-cache/$project
+version=T$(date +"%Y%m%d%H%M")
 
-mkdir -p $workPath
-echo "npm编译参数: 工作目录=$workPath, 版本号=$version"
-
-# 遍历 workPath 下的所有一级目录文件，删除除了 node_modules 外的所有文件
-find "$workPath" -maxdepth 1 -print | while read item; do
-    if [ "$item" = "$workPath" ]; then
-        continue
-    fi
-
-    if [ "$item" = "$workPath/node_modules" ]; then
-        continue
-    fi
-
-    echo "正在删除缓存：$item"
-    rm -r $item
-done
-
-# 复制当前目录文件到缓存目录
-find . -maxdepth 1 ! -name "node_modules" ! -name "." ! -name ".git" ! -name ".gitignore" ! -name ".vitepress" ! -name ".idea" ! -name "dist" -exec cp -r {} $workPath/ \;
-# 处理了一下.vitepress目录下的文件
-find .vitepress -maxdepth 1 ! -name "." ! -name "cache" -exec cp -r {} $workPath/.vitepress/ \;
-# 切换工作目录
-cd $workPath
-
-# 判断是否有插件，有的话就执行
-if [ -e plugin.sh ]; then
-  source plugin.sh
-fi
+# 切换目录
+cd $projdir
 
 # 安装依赖、编译
 npm i
@@ -51,16 +25,22 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "================================="
+
 # nexus docker 仓库地址
 nexus_url=registry.cn-hongkong.aliyuncs.com/yuanbaobaoo/site
 # 是否删除本地镜像
 dellocal=true
 # 打包镜像
 echo "docker打包参数: project=$project, version=$version"
-
-# build
 echo "start: docker build -t $project ."
+
+# 复制nginx配置
+cp ../nginx.conf .
+# build
 docker build -q -t $project .
+# 删除刚才复制的nginx.conf
+rm  nginx.conf
 
 # 检查退出状态码
 if [ $? -ne 0 ]; then
