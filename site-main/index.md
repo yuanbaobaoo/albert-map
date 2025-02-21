@@ -9,8 +9,8 @@ hero:
     - theme: brand
       text: "UP：小王Albert"
       link: http://map.aoowu.cn/albert/
-#    - theme: alt
-#      text: "UP：草说木言"
+    - theme: alt
+      text: "正在寻找下一位UP"
 #      link: http://localhost:5272/csmy/
 
 features:
