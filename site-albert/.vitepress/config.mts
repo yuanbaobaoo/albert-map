@@ -1,37 +1,30 @@
 import {defineConfig} from 'vitepress'
 import Sidebar from "./sidebar";
+import env from "../../env";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: "电图宝",
-    description: "小王Albert的电子地图 | 小王Albert的电子地图 · 在线版 | 世界地图 | 中国地图 | 电子地图 | 王骁Albert | 东盟十国 | 西非 | 中东 | 马格里布",
-    lastUpdated: true,
-    outDir: "./dist",
     base: "/albert",
-    srcExclude: [
-        '**/README.md'
-    ],
-    head: [
-        [
-            'meta',
-            {name: "viewport", content: "width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=0"}
-        ],
-    ],
+    title: "电图宝",
+    description: env.DESC,
     appearance: false,
+    lastUpdated: true,
     themeConfig: {
-        // 标题左侧logo
-        logo: "",
-
         // https://vitepress.dev/reference/default-theme-config
         nav: [
+            {text: '首页', link: env.MAIN_URL},
             {text: '地图', link: '/'},
-            {text: '小王AlbertB站主页', link: 'https://space.bilibili.com/1140672573'},
-            {text: '东盟十国', link: '/docs/videos-ASEAN?a=菲律宾'},
-            {text: '中亚五国', link: '/docs/videos-CentralAsia?a=吉尔吉斯斯坦'},
-            {text: '中东系列', link: '/docs/videos-MiddleEast?a=卡塔尔'},
-            {text: '马格里布', link: '/docs/videos-Maghreb?a=利比亚'},
-            {text: '西非系列', link: '/docs/videos-WestAfrica?a=马里'},
-            {text: '关于我们', link: '/docs/about'},
+            {
+                text: '视频',
+                items: [
+                    {text: '东盟十国', link: '/videos/菲律宾'},
+                    {text: '中亚五国', link: '/videos/吉尔吉斯斯坦'},
+                    {text: '中东系列', link: '/videos/卡塔尔'},
+                    {text: '马格里布', link: '/videos/利比亚'},
+                    {text: '西非系列', link: '/videos/马里'}
+                ]
+            },
+            {text: '关于我们', link: env.MAIN_URL + "/about"},
         ],
 
         // 搜索
@@ -48,15 +41,21 @@ export default defineConfig({
 
         // 编辑链接
         editLink: {
-            pattern: 'https://github.com/yuanbaobaoo/v-map-wiki',
+            pattern: env.GITHUB_URL,
             text: '在GitHub上编辑此页'
         },
 
         // socialLinks
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/yuanbaobaoo/v-map-wiki' },
+            { icon: 'github', link: env.GITHUB_URL },
         ]
     },
+    head: [
+        [
+            'meta',
+            {name: "viewport", content: "width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=0"}
+        ],
+    ],
     vite: {
         css: {
             preprocessorOptions: {
@@ -65,5 +64,7 @@ export default defineConfig({
                 }
             }
         },
-    }
+    },
+    outDir: "./dist",
+
 })

@@ -121,15 +121,6 @@
     }
 }
 
-.VPHome {
-    margin-bottom: 0 !important;
-}
-
-.VPHome .container {
-    padding: 0 !important;
-    max-width: unset !important;
-}
-
 /**
  * Component: Custom Block
  * -------------------------------------------------------------------------- */
@@ -147,19 +138,4 @@
 
 .DocSearch {
     --docsearch-primary-color: var(--vp-c-brand-1) !important;
-}
-
-
-.VPDoc.has-aside .content-container {
-    max-width: 100% !important;
-}
-
-/* 通过css控制右侧大纲容器隐藏 */
-.VPDoc.has-aside .aside{
-    display: none !important;
-}
-
-
-.VPNavBar.home.top .container {
-    max-width: unset !important;
 }

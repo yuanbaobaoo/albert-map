@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: "UP：小王Albert"
-      link: http://localhost:5271/albert/
-    - theme: alt
-      text: "UP：草说木言"
-      link: http://localhost:5272/csmy/
+      link: http://map.aoowu.cn/albert/
+#    - theme: alt
+#      text: "UP：草说木言"
+#      link: http://localhost:5272/csmy/
 
 features:
   - icon: 🕸

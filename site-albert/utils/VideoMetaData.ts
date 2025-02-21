@@ -1,4 +1,4 @@
-import names from "../config/names.json"
+import names from "../names.json"
 import sidebar from "../.vitepress/sidebar";
 
 export class VideoMetaData {
@@ -13,6 +13,25 @@ export class VideoMetaData {
         }
 
         return map;
+    }
+
+    /**
+     * 获取存在的地区信息
+     */
+    public static getExistsRegions() {
+        let exists: any[] = [];
+
+        sidebar.forEach((k, v) => {
+            if (!k.isVideos) {
+                return ;
+            }
+
+            k.items.forEach(v => {
+                exists.push(v);
+            });
+        });
+
+        return exists;
     }
 
     /**
