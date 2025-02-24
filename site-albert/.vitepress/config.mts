@@ -10,6 +10,8 @@ export default defineConfig({
     appearance: false,
     lastUpdated: true,
     themeConfig: {
+        logo: "/logo.png",
+
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             {text: '首页', link: env.MAIN_URL},

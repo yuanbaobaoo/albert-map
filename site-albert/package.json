@@ -6,7 +6,8 @@
         "docs:preview": "vitepress preview"
     },
     "dependencies": {
-        "echarts": "^5.5.1"
+        "echarts": "^5.5.1",
+        "element-plus": "^2.9.5"
     },
     "devDependencies": {
         "sass-embedded": "^1.83.4",
