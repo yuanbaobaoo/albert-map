@@ -3,7 +3,10 @@ layout: home
 
 hero:
   name: "电图宝"
-  text: "🤪"
+  text: "😀☝"
+  image: 
+    src: "/logo.png"
+    alt: "电图宝"
   tagline: 一个收录B站部分UP视频的电子地图开源项目
   actions:
     - theme: brand

@@ -10,10 +10,17 @@ export default defineConfig({
     lastUpdated: true,
     description: env.DESC,
     themeConfig: {
+        logo: "/logo.png",
+
+        outline: {
+            level: 'deep',
+            label: '快捷导航',
+        },
+
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             {text: '指南', link: '/'},
-            {text: '栏目：《电子地图册》', link: '/albert'},
+            {text: '栏目：《电子地图册》', link: env.ALBERT_URL},
             {text: '关于我们', link: '/about'},
         ],
 

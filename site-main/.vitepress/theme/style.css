@@ -139,3 +139,7 @@
 .DocSearch {
     --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
+
+.VPHero.has-image .image-bg {
+    background: unset !important;
+}

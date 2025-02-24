@@ -10,7 +10,7 @@ layout: doc
 - （期望）能够缓存收录的视频
 
 ### 收录栏目
-<table class="videos" style="width: 100vw;text-align: center">
+<table class="videos">
   <tr>
     <th style="width: 150px">栏目名称</th>
     <th>UP主</th>
