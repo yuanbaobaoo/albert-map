@@ -115,8 +115,6 @@ function initChart() {
 
     // 图例放大、缩小、拖拽
     chart.on("georoam", (e: any) => {
-        console.log(e.totalZoom, chart.getOption().geo[0].zoom);
-
         e.totalZoom && (scale.value = e.totalZoom);
     })
 }
@@ -163,7 +161,6 @@ function getLightColor() {
  * slider change
  */
 function sliderChange(center?: object) {
-    console.log(scale.value);
     const option: any = {geo: {zoom: scale.value}};
 
     if (chart) {
