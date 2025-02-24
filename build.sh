@@ -48,7 +48,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # push
-imageName="$nexus_url:$project-$version"
+imageName="$nexus_url:$project_$version"
 echo "docker tag $project $imageName"
 docker tag $project $imageName
 
