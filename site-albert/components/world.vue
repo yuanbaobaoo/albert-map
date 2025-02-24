@@ -115,8 +115,9 @@ function initChart() {
 
     // 图例放大、缩小、拖拽
     chart.on("georoam", (e: any) => {
-        //scale.value = e.totalZoom;
-        console.log("e.totalZoom;", e.totalZoom);
+        console.log(e.totalZoom, chart.getOption().geo[0].zoom);
+
+        e.totalZoom && (scale.value = e.totalZoom);
     })
 }
 
@@ -161,10 +162,16 @@ function getLightColor() {
 /**
  * slider change
  */
-function sliderChange(p?: object) {
+function sliderChange(center?: object) {
+    console.log(scale.value);
+    const option: any = {geo: {zoom: scale.value}};
+
     if (chart) {
-        chart.setOption({geo: {zoom: scale.value}});
-        p && chart.setOption(p);
+        if (center) {
+            option.geo.center = center;
+        }
+
+        chart.setOption(option);
     }
 }
 
@@ -173,32 +180,14 @@ function sliderChange(p?: object) {
  */
 function resetScale() {
     scale.value = 1;
-    sliderChange({
-        geo: {
-            center: [0, 0]
-        }
-    });
-}
-
-/**
- * 缩放
- * @param step
- */
-function transfer(step: number) {
-    const y = 10;
-
-    if (step < 50) {
-        return 1 + (y - 1) / 48 * (step - 1)
-    }
-
-    return y * (20 / y) ** ((step - 50) / 50)
+    sliderChange([0, 0]);
 }
 </script>
 
 <template>
     <div class="map-container" :style="{ width: width + 'px', height: height + 'px' }">
         <div class="map" id="map"/>
-        <el-slider class="slider-box" vertical v-model="scale" :min="1" :max="20" @input="sliderChange"/>
+        <el-slider class="slider-box" vertical v-model="scale" :min="1" :max="20" @input="sliderChange()"/>
         <el-button class="reset-btn" :icon="Refresh" @click="resetScale">重置图例</el-button>
     </div>
 </template>
