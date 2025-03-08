@@ -262,6 +262,11 @@ export default [
                 text: '贝宁', link: '/videos/贝宁',
                 title: "从理想战士到投降抽象，霸权如何逼良为娼【西非08丨贝宁】",
                 bvid: "BV14eKKeiE4U",
+            },
+            {
+                text: '多哥', link: '/videos/多哥',
+                title: "爆头总统，巫师治国，西非小国抽象薅帝国羊毛【西非09丨多哥】",
+                bvid: "BV1Q69mYbE35",
             }
         ]
     },
